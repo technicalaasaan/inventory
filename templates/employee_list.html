@@ -1,0 +1,23 @@
+<html><body>
+<h1>Profiles</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>DOJ</th>
+            <th>Address</th>
+            <th>Mobile</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for profile in profiles %}
+    <tr>
+        <td>{{ profile.emp_name }}</td>
+        <td>{{ profile.doj }}</td>
+        <td>{{ profile.address }}</td>
+        <td>{{ profile.mobile }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body></html>

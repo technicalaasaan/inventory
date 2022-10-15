@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Employee</h2> <button onclick="get_employee()">Load Data</button>
+</body>
+<script>
+  function gen_table(input) {
+      const table = document.body.appendChild(document.createElement('table'));
+      const thead = table.appendChild(document.createElement('thead'));
+      const tr = thead.appendChild(document.createElement('tr'));
+      const columnTexts = Object.keys(input[0]);
+      columnTexts.forEach((columnText) => {
+        tr.appendChild(document.createElement('td'))
+          .textContent = columnText;
+      });
+      const tbody = table.appendChild(document.createElement('tbody'));
+      input.forEach((item) => {
+        const tr = tbody.appendChild(document.createElement('tr'));
+        const values = Object.values(item);
+        values.forEach(value => {
+          tr.appendChild(document.createElement('td'))
+            .textContent = value;
+        });
+      });
+  }
+  function get_employee() {
+    return fetch("http://127.0.0.1:8000/inv/employee", {mode: 'no-cors', header: {'Access-Control-Allow-Origin':'*'}})
+    .then(result => result.json())
+    .then(data => {
+      console.log(data);
+      gen_table(data);
+    })
+    .catch(error => console.log(error))
+  }
+
+</script>
+</html>
